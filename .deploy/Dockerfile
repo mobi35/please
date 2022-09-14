@@ -89,7 +89,9 @@ ARG PUSHER_APP_CLUSTER=${PUSHER_APP_CLUSTER}
 
 # Start app
 EXPOSE 80
-COPY ./.deploy/entrypoint.sh /
-COPY /entrypoint.sh /
+COPY ./.deploy/entrypoint.sh ./
 
-ENTRYPOINT ["sh", "./entrypoint.sh"]
+RUN chmod +x entrypoint.sh
+ENV PATH="$LARAVEL_PATH:$PATH"
+
+ENTRYPOINT ["entrypoint.sh"]
